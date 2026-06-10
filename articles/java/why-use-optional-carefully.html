@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="记录在 Java 代码中使用 Optional 时应该保留的边界感。">
+  <title>Optional 不是所有空值问题的答案 · 远山手记</title>
+  <link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body id="top">
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="../../index.html">远山手记</a>
+      <nav aria-label="主要导航">
+    <a href="../../categories/java.html">
+      Java
+    </a>
+    <a href="../../categories/ai.html">
+      人工智能
+    </a>
+    <a href="../../categories/literature.html">
+      文学创作
+    </a>
+    <a href="../../categories/essays.html">
+      个人随笔
+    </a></nav>
+    </div>
+  </header>
+  <div class="shell page-grid">
+    <main>
+      <article>
+        <header class="article-header">
+          <a class="article-category"
+             href="../../categories/java.html">
+            Java
+          </a>
+          <h1>Optional 不是所有空值问题的答案</h1>
+          <p>记录在 Java 代码中使用 Optional 时应该保留的边界感。</p>
+          <time datetime="2026-06-10">2026-06-10</time>
+        </header>
+        
+    <nav class="article-toc" aria-label="文章目录">
+      <p class="eyebrow">CONTENTS</p>
+      <ol>
+        <li class="toc-level-2">
+          <a href="#optional-%E8%A7%A3%E5%86%B3%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88">Optional 解决的是什么</a>
+        </li>
+        <li class="toc-level-2">
+          <a href="#%E4%B8%8D%E8%A6%81%E6%8A%8A-optional-%E7%94%A8%E6%88%90%E5%8C%85%E8%A3%85%E7%BA%B8">不要把 Optional 用成包装纸</a>
+        </li>
+        <li class="toc-level-2">
+          <a href="#%E4%B8%8D%E8%A6%81%E6%80%A5%E7%9D%80-get">不要急着 get</a>
+        </li>
+        <li class="toc-level-2">
+          <a href="#%E8%AE%A9%E8%BF%94%E5%9B%9E%E5%80%BC%E8%A1%A8%E8%BE%BE%E4%B8%9A%E5%8A%A1%E5%90%AB%E4%B9%89">让返回值表达业务含义</a>
+        </li>
+        <li class="toc-level-2">
+          <a href="#%E5%B0%8F%E7%BB%93">小结</a>
+        </li>
+      </ol>
+    </nav>
+        <div class="prose"><h2 id="optional-解决的是什么">Optional 解决的是什么</h2>
+<p><code>Optional</code> 的价值不在于让代码看起来更“函数式”，而是把“这个值可能不存在”
+这件事写进方法返回值里。调用者看到返回类型，就会知道这里必须处理缺失情况。</p>
+<p>例如查询用户时，返回 <code>Optional&lt;User&gt;</code> 比返回 <code>null</code> 更明确：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> Optional&lt;User&gt; <span class="hljs-title function_">findUserById</span><span class="hljs-params">(Long userId)</span> {
+    <span class="hljs-keyword">return</span> userRepository.findById(userId);
+}
+</code></pre>
+<p>这段代码表达的是：查询可能成功，也可能没有对应用户。调用者不能假装结果一定存在。</p>
+<h2 id="不要把-optional-用成包装纸">不要把 Optional 用成包装纸</h2>
+<p><code>Optional</code> 不适合到处使用。它更适合作为方法返回值，而不是字段、参数或集合元素。</p>
+<p>下面这种写法通常没有必要：</p>
+<pre><code class="hljs language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">updateUser</span><span class="hljs-params">(Optional&lt;String&gt; nickname)</span> {
+    nickname.ifPresent(user::setNickname);
+}
+</code></pre>
+<p>参数位置使用 <code>Optional</code> 会让调用者承担额外包装成本，也会让接口语义变得别扭。多数情况下，
+直接传普通值，并在方法内部判断是否为空，会更清晰。</p>
+<h2 id="不要急着-get">不要急着 get</h2>
+<p>如果拿到 <code>Optional</code> 后立刻调用 <code>get()</code>，那它和直接使用 <code>null</code> 的风险没有本质区别。</p>
+<pre><code class="hljs language-java"><span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> findUserById(userId).get();
+</code></pre>
+<p>更好的方式是把缺失情况写清楚：</p>
+<pre><code class="hljs language-java"><span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> findUserById(userId)
+    .orElseThrow(() -&gt; <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;用户不存在：&quot;</span> + userId));
+</code></pre>
+<p>这样异常来自业务语义，而不是运行时突然抛出的 <code>NoSuchElementException</code>。</p>
+<h2 id="让返回值表达业务含义">让返回值表达业务含义</h2>
+<p>并不是所有“查不到”都应该用 <code>Optional</code>。如果缺失本身是异常情况，可以直接抛出业务异常；
+如果缺失是正常分支，<code>Optional</code> 才更合适。</p>
+<p>我比较喜欢用这个标准判断：</p>
+<ul>
+<li>正常允许不存在：返回 <code>Optional&lt;T&gt;</code>。</li>
+<li>理论上必须存在：返回 <code>T</code>，不存在时抛出明确异常。</li>
+<li>需要说明失败原因：返回业务结果对象，而不是只返回 <code>Optional&lt;T&gt;</code>。</li>
+</ul>
+<h2 id="小结">小结</h2>
+<p><code>Optional</code> 是表达“不一定有值”的工具，不是消灭所有 <code>null</code> 的魔法。真正重要的是接口语义：
+调用者是否能从方法签名中看懂结果可能缺失，以及缺失时应该怎么处理。</p>
+</div>
+        <nav class="adjacent-nav" aria-label="相邻文章">
+          <a href="welcome-to-java.html">
+    <span>上一篇</span><strong>从这里开始记录 Java</strong>
+  </a>
+          <span class="adjacent-empty">下一篇</span>
+        </nav>
+      </article>
+      <a class="back-to-top" href="#top">返回顶部</a></main>
+    <aside>
+      <section class="aside-card">
+        <p class="eyebrow">ABOUT</p>
+        <h2>关于这里</h2>
+        <p>记录技术学习、人工智能、文学创作与生活随想。</p>
+      </section>
+      <section class="aside-card">
+        <p class="eyebrow">CATEGORIES</p>
+        <ul class="category-list">
+    <li>
+      <a href="../../categories/java.html">
+        <span>Java</span>
+        <span>2</span>
+      </a>
+    </li>
+    <li>
+      <a href="../../categories/ai.html">
+        <span>人工智能</span>
+        <span>1</span>
+      </a>
+    </li>
+    <li>
+      <a href="../../categories/literature.html">
+        <span>文学创作</span>
+        <span>1</span>
+      </a>
+    </li>
+    <li>
+      <a href="../../categories/essays.html">
+        <span>个人随笔</span>
+        <span>1</span>
+      </a>
+    </li></ul>
+      </section>
+    </aside>
+  </div>
+  <footer class="site-footer">
+    <div class="shell">以 Markdown 写作，以网页阅读。</div>
+  </footer>
+  <script src="../../assets/blog.js"></script>
+</body>
+</html>
