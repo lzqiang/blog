@@ -9,48 +9,34 @@
 </head>
 <body id="top">
   <header class="site-header">
-    <div class="shell header-inner">
-      <a class="brand" href="../index.html">远山手记</a>
-      <nav aria-label="主要导航">
-      <a href="java.html">
-        Java
-      </a>
-      <div class="archive-nav">
-        <div class="archive-nav-label">
-          
-      <a href="interview.html">
-        面试题
-      </a>
-          
-    <button class="archive-toggle" type="button"
-      aria-label="展开面试题归档"
-      aria-expanded="false"
-      aria-controls="interview-archives">⌄</button>
-    <div class="archive-panel" id="interview-archives" hidden>
-      
-        <section class="archive-year">
-          <a class="archive-year-link"
-             href="interview/2026.html">
-            2026 年
-          </a>
-          <div class="archive-months">
-            
-              <a href="interview/2026/06.html">06 月</a>
-          </div>
-        </section>
+    <div class="shell masthead-meta">
+      <span>二〇二六年六月 · 第一期</span>
+      <span>技术与文字的个人刊物</span>
+      <span>以 Markdown 写作，以网页阅读</span>
     </div>
-        </div>
+    <div class="shell brand-row">
+      <p>远山不语<br>文字自有回声</p>
+      <a class="brand" href="../index.html">
+        远山手记
+        <small>Notes from distant mountains</small>
+      </a>
+      <p>Java · AI<br>文学 · 随笔</p>
+    </div>
+    <nav class="primary-nav" aria-label="主要导航">
+      <div class="shell nav-inner"><a href="java.html">Java</a>
+    <div class="topic-nav">
+      <a class="topic-trigger" href="interview.html">面试题</a>
+      <div class="topic-panel" aria-label="面试题分类">
+        
+          <a href="interview/tags/java.html">Java</a>
+          <a href="interview/tags/vue.html">Vue</a>
+          <a href="interview/tags/ai.html">AI</a>
+          <a href="interview/tags/queue.html">队列</a>
+          <a href="interview/tags/database.html">数据库</a>
+          <a href="interview/tags/concurrency.html">并发</a>
       </div>
-      <a href="ai.html">
-        人工智能
-      </a>
-      <a href="literature.html">
-        文学创作
-      </a>
-      <a href="essays.html">
-        个人随笔
-      </a></nav>
-    </div>
+    </div><a href="ai.html">人工智能</a><a href="literature.html">文学创作</a><a href="essays.html">个人随笔</a></div>
+    </nav>
   </header>
   <div class="shell page-grid">
     <main>
@@ -60,58 +46,124 @@
         <p>面试准备、常见问题与知识点梳理。</p>
       </header>
       <ol class="article-list">
-    <li>
-      <a href="../articles/interview/interiew20260610.html">
-        <span class="article-meta">面试题 · 2026-06-10</span>
-        <h2>20260610面试题</h2>
+    <li class="article-item">
+      <span class="article-number">01</span>
+      <div class="article-main">
+        <span class="article-meta">面试题</span>
+        <a href="../articles/interview/interiew20260610.html">
+          <h2>20260610面试题</h2>
+        </a>
         <p>2026-06-10面试题</p>
-      </a>
+      </div>
+      <time class="article-date" datetime="2026-06-10">
+        2026.06.10
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">02</span>
+      <div class="article-main">
+        <span class="article-meta">面试题</span>
+        <a href="../articles/interview/distributed-lock.html">
+          <h2>分布式锁需要回答哪些问题</h2>
+        </a>
+        <p>从互斥、超时、续期、所有权和故障恢复分析分布式锁。</p>
+      </div>
+      <time class="article-date" datetime="2026-04-11">
+        2026.04.11
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">03</span>
+      <div class="article-main">
+        <span class="article-meta">面试题</span>
+        <a href="../articles/interview/redis-cache.html">
+          <h2>缓存穿透、击穿和雪崩有什么区别</h2>
+        </a>
+        <p>对比三类缓存故障的触发条件、影响范围和应对方案。</p>
+      </div>
+      <time class="article-date" datetime="2025-12-04">
+        2025.12.04
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">04</span>
+      <div class="article-main">
+        <span class="article-meta">面试题</span>
+        <a href="../articles/interview/mysql-index.html">
+          <h2>MySQL 联合索引为什么遵循最左匹配</h2>
+        </a>
+        <p>从 B+ 树排序方式理解联合索引的查询边界。</p>
+      </div>
+      <time class="article-date" datetime="2025-07-12">
+        2025.07.12
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">05</span>
+      <div class="article-main">
+        <span class="article-meta">面试题</span>
+        <a href="../articles/interview/jvm-memory-areas.html">
+          <h2>JVM 运行时数据区面试梳理</h2>
+        </a>
+        <p>区分堆、虚拟机栈、方法区和程序计数器的职责与常见异常。</p>
+      </div>
+      <time class="article-date" datetime="2025-03-31">
+        2025.03.31
+      </time>
     </li>
   </ol></main>
     <aside>
       <section class="aside-card">
         <p class="eyebrow">ABOUT</p>
         <h2>关于这里</h2>
-        <p>记录技术学习、人工智能、文学创作与生活随想。</p>
+        <p>一份慢慢生长的个人刊物。写技术，也写那些无法被代码完全表达的事情。</p>
       </section>
       <section class="aside-card">
-        <p class="eyebrow">CATEGORIES</p>
+        <p class="eyebrow">INDEX</p>
+        <h2>分类索引</h2>
         <ul class="category-list">
     <li>
       <a href="java.html">
         <span>Java</span>
-        <span>2</span>
+        <span>5</span>
       </a>
     </li>
     <li>
       <a href="interview.html">
         <span>面试题</span>
-        <span>1</span>
+        <span>5</span>
       </a>
     </li>
     <li>
       <a href="ai.html">
         <span>人工智能</span>
-        <span>1</span>
+        <span>5</span>
       </a>
     </li>
     <li>
       <a href="literature.html">
         <span>文学创作</span>
-        <span>1</span>
+        <span>5</span>
       </a>
     </li>
     <li>
       <a href="essays.html">
         <span>个人随笔</span>
-        <span>1</span>
+        <span>5</span>
       </a>
     </li></ul>
       </section>
+      <blockquote class="aside-quote">
+        <p>知识需要经过表达，才能从模糊印象变成可以复用的理解。</p>
+        <cite>远山手记 · 写作原则</cite>
+      </blockquote>
     </aside>
   </div>
   <footer class="site-footer">
-    <div class="shell">以 Markdown 写作，以网页阅读。</div>
+    <div class="shell footer-inner">
+      <span>© 2026 远山手记</span>
+      <span>愿每一次记录，都让理解更清楚一点。</span>
+    </div>
   </footer>
   <script src="../assets/blog.js"></script>
 </body>

@@ -15,9 +15,17 @@ export function renderArticlePage({
   article,
   categories,
   adjacent,
-  interviewArchives = [],
+  interviewTags = [],
   pagePath
 }) {
+  const tags = article.tags.length === 0 ? "" : `
+    <div class="article-tags" aria-label="文章标签">
+      ${article.tags.map((tag) => `
+        <a href="${hrefFrom(
+          pagePath,
+          `categories/interview/tags/${tag.key}.html`
+        )}"># ${escapeHtml(tag.label)}</a>`).join("")}
+    </div>`;
   const toc = article.toc.length === 0 ? "" : `
     <nav class="article-toc" aria-label="文章目录">
       <p class="eyebrow">CONTENTS</p>
@@ -32,7 +40,7 @@ export function renderArticlePage({
     title: article.title,
     description: article.summary,
     categories,
-    interviewArchives,
+    interviewTags,
     pagePath,
     content: `
       <article>
@@ -44,6 +52,7 @@ export function renderArticlePage({
           <h1>${escapeHtml(article.title)}</h1>
           <p>${escapeHtml(article.summary)}</p>
           <time datetime="${article.dateText}">${article.dateText}</time>
+          ${tags}
         </header>
         ${toc}
         <div class="prose">${article.html}</div>

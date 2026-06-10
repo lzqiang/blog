@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="用真实样本、明确标准和回归测试衡量模型能力变化。">
+  <title>如何建立模型输出评估集 · 远山手记</title>
+  <link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body id="top">
+  <header class="site-header">
+    <div class="shell masthead-meta">
+      <span>二〇二六年六月 · 第一期</span>
+      <span>技术与文字的个人刊物</span>
+      <span>以 Markdown 写作，以网页阅读</span>
+    </div>
+    <div class="shell brand-row">
+      <p>远山不语<br>文字自有回声</p>
+      <a class="brand" href="../../index.html">
+        远山手记
+        <small>Notes from distant mountains</small>
+      </a>
+      <p>Java · AI<br>文学 · 随笔</p>
+    </div>
+    <nav class="primary-nav" aria-label="主要导航">
+      <div class="shell nav-inner"><a href="../../categories/java.html">Java</a>
+    <div class="topic-nav">
+      <a class="topic-trigger" href="../../categories/interview.html">面试题</a>
+      <div class="topic-panel" aria-label="面试题分类">
+        
+          <a href="../../categories/interview/tags/java.html">Java</a>
+          <a href="../../categories/interview/tags/vue.html">Vue</a>
+          <a href="../../categories/interview/tags/ai.html">AI</a>
+          <a href="../../categories/interview/tags/queue.html">队列</a>
+          <a href="../../categories/interview/tags/database.html">数据库</a>
+          <a href="../../categories/interview/tags/concurrency.html">并发</a>
+      </div>
+    </div><a href="../../categories/ai.html">人工智能</a><a href="../../categories/literature.html">文学创作</a><a href="../../categories/essays.html">个人随笔</a></div>
+    </nav>
+  </header>
+  <div class="shell page-grid">
+    <main>
+      <article>
+        <header class="article-header">
+          <a class="article-category"
+             href="../../categories/ai.html">
+            人工智能
+          </a>
+          <h1>如何建立模型输出评估集</h1>
+          <p>用真实样本、明确标准和回归测试衡量模型能力变化。</p>
+          <time datetime="2025-11-16">2025-11-16</time>
+          
+        </header>
+        
+    <nav class="article-toc" aria-label="文章目录">
+      <p class="eyebrow">CONTENTS</p>
+      <ol>
+        <li class="toc-level-2">
+          <a href="#%E4%BB%8E%E7%9C%9F%E5%AE%9E%E5%A4%B1%E8%B4%A5%E6%A1%88%E4%BE%8B%E5%BC%80%E5%A7%8B">从真实失败案例开始</a>
+        </li>
+        <li class="toc-level-2">
+          <a href="#%E6%8A%8A%E5%A5%BD%E5%9D%8F%E5%86%99%E6%88%90%E5%8F%AF%E5%88%A4%E6%96%AD%E7%9A%84%E6%A0%87%E5%87%86">把好坏写成可判断的标准</a>
+        </li>
+        <li class="toc-level-2">
+          <a href="#%E6%AF%8F%E6%AC%A1%E5%8F%98%E6%9B%B4%E9%83%BD%E5%81%9A%E5%9B%9E%E5%BD%92">每次变更都做回归</a>
+        </li>
+      </ol>
+    </nav>
+        <div class="prose"><h2 id="从真实失败案例开始">从真实失败案例开始</h2>
+<p>评估集不应只包含理想问题。线上误答、格式错误、拒答失败和边界输入，
+更能反映系统在真实使用中的风险。</p>
+<h2 id="把好坏写成可判断的标准">把好坏写成可判断的标准</h2>
+<p>“回答质量高”过于模糊。可以拆成事实正确、引用完整、格式合法、语气合适
+和是否遗漏关键步骤等维度。</p>
+<h2 id="每次变更都做回归">每次变更都做回归</h2>
+<p>更换模型、提示词或检索策略后，使用同一批样本重新评估。平均分提高并不
+代表所有场景都变好，还要检查关键案例是否发生退化。</p>
+</div>
+        <nav class="adjacent-nav" aria-label="相邻文章">
+          <a href="tool-calling-boundaries.html">
+    <span>上一篇</span><strong>工具调用中的信任边界</strong>
+  </a>
+          <a href="rag-quality.html">
+    <span>下一篇</span><strong>RAG 效果不好时先检查检索</strong>
+  </a>
+        </nav>
+      </article>
+      <a class="back-to-top" href="#top">返回顶部</a></main>
+    <aside>
+      <section class="aside-card">
+        <p class="eyebrow">ABOUT</p>
+        <h2>关于这里</h2>
+        <p>一份慢慢生长的个人刊物。写技术，也写那些无法被代码完全表达的事情。</p>
+      </section>
+      <section class="aside-card">
+        <p class="eyebrow">INDEX</p>
+        <h2>分类索引</h2>
+        <ul class="category-list">
+    <li>
+      <a href="../../categories/java.html">
+        <span>Java</span>
+        <span>5</span>
+      </a>
+    </li>
+    <li>
+      <a href="../../categories/interview.html">
+        <span>面试题</span>
+        <span>5</span>
+      </a>
+    </li>
+    <li>
+      <a href="../../categories/ai.html">
+        <span>人工智能</span>
+        <span>5</span>
+      </a>
+    </li>
+    <li>
+      <a href="../../categories/literature.html">
+        <span>文学创作</span>
+        <span>5</span>
+      </a>
+    </li>
+    <li>
+      <a href="../../categories/essays.html">
+        <span>个人随笔</span>
+        <span>5</span>
+      </a>
+    </li></ul>
+      </section>
+      <blockquote class="aside-quote">
+        <p>知识需要经过表达，才能从模糊印象变成可以复用的理解。</p>
+        <cite>远山手记 · 写作原则</cite>
+      </blockquote>
+    </aside>
+  </div>
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <span>© 2026 远山手记</span>
+      <span>愿每一次记录，都让理解更清楚一点。</span>
+    </div>
+  </footer>
+  <script src="../../assets/blog.js"></script>
+</body>
+</html>

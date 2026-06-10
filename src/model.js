@@ -1,44 +1,4 @@
-import { CATEGORIES } from "./config.js";
-
-function buildInterviewArchives(articles) {
-  const archivesByYear = new Map();
-
-  for (const article of articles) {
-    if (article.categoryKey !== "interview") {
-      continue;
-    }
-
-    const [year, month] = article.dateText.match(/^(\d{4})-(\d{2})/).slice(1);
-    if (!archivesByYear.has(year)) {
-      archivesByYear.set(year, new Map());
-    }
-
-    const months = archivesByYear.get(year);
-    if (!months.has(month)) {
-      months.set(month, []);
-    }
-    months.get(month).push(article);
-  }
-
-  return [...archivesByYear.entries()]
-    .sort(([leftYear], [rightYear]) => rightYear.localeCompare(leftYear))
-    .map(([year, articlesByMonth]) => {
-      const months = [...articlesByMonth.entries()]
-        .sort(([leftMonth], [rightMonth]) =>
-          rightMonth.localeCompare(leftMonth)
-        )
-        .map(([month, monthArticles]) => ({
-          month,
-          articles: monthArticles
-        }));
-
-      return {
-        year,
-        months,
-        articles: months.flatMap(({ articles: monthArticles }) => monthArticles)
-      };
-    });
-}
+import { CATEGORIES, INTERVIEW_TAGS } from "./config.js";
 
 export function buildSiteModel(inputArticles) {
   const articles = [...inputArticles].sort(
@@ -50,6 +10,13 @@ export function buildSiteModel(inputArticles) {
     articles: articles.filter((article) => article.categoryKey === category.key)
   }));
   const navigation = new Map();
+  const interviewTags = INTERVIEW_TAGS.map((tag) => ({
+    ...tag,
+    articles: articles.filter((article) =>
+      article.categoryKey === "interview"
+      && article.tags.some(({ key }) => key === tag.key)
+    )
+  }));
 
   for (const category of categories) {
     category.articles.forEach((currentArticle, index) => {
@@ -64,6 +31,6 @@ export function buildSiteModel(inputArticles) {
     articles,
     categories,
     navigation,
-    interviewArchives: buildInterviewArchives(articles)
+    interviewTags
   };
 }

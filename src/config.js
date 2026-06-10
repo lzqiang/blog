@@ -33,3 +33,16 @@ export const CATEGORY_BY_KEY = new Map(
 export const CATEGORY_BY_LABEL = new Map(
   CATEGORIES.map((category) => [category.label, category])
 );
+
+export const INTERVIEW_TAGS = Object.freeze([
+  { key: "java", label: "Java" },
+  { key: "vue", label: "Vue" },
+  { key: "ai", label: "AI" },
+  { key: "queue", label: "队列" },
+  { key: "database", label: "数据库" },
+  { key: "concurrency", label: "并发" }
+]);
+
+export const INTERVIEW_TAG_BY_LABEL = new Map(
+  INTERVIEW_TAGS.map((tag) => [tag.label, tag])
+);

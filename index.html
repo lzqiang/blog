@@ -9,100 +9,383 @@
 </head>
 <body id="top">
   <header class="site-header">
-    <div class="shell header-inner">
-      <a class="brand" href="index.html">远山手记</a>
-      <nav aria-label="主要导航">
-      <a href="categories/java.html">
-        Java
-      </a>
-      <div class="archive-nav">
-        <div class="archive-nav-label">
-          
-      <a href="categories/interview.html">
-        面试题
-      </a>
-          
-    <button class="archive-toggle" type="button"
-      aria-label="展开面试题归档"
-      aria-expanded="false"
-      aria-controls="interview-archives">⌄</button>
-    <div class="archive-panel" id="interview-archives" hidden>
-      
-        <section class="archive-year">
-          <a class="archive-year-link"
-             href="categories/interview/2026.html">
-            2026 年
-          </a>
-          <div class="archive-months">
-            
-              <a href="categories/interview/2026/06.html">06 月</a>
-          </div>
-        </section>
+    <div class="shell masthead-meta">
+      <span>二〇二六年六月 · 第一期</span>
+      <span>技术与文字的个人刊物</span>
+      <span>以 Markdown 写作，以网页阅读</span>
     </div>
-        </div>
+    <div class="shell brand-row">
+      <p>远山不语<br>文字自有回声</p>
+      <a class="brand" href="index.html">
+        远山手记
+        <small>Notes from distant mountains</small>
+      </a>
+      <p>Java · AI<br>文学 · 随笔</p>
+    </div>
+    <nav class="primary-nav" aria-label="主要导航">
+      <div class="shell nav-inner"><a href="categories/java.html">Java</a>
+    <div class="topic-nav">
+      <a class="topic-trigger" href="categories/interview.html">面试题</a>
+      <div class="topic-panel" aria-label="面试题分类">
+        
+          <a href="categories/interview/tags/java.html">Java</a>
+          <a href="categories/interview/tags/vue.html">Vue</a>
+          <a href="categories/interview/tags/ai.html">AI</a>
+          <a href="categories/interview/tags/queue.html">队列</a>
+          <a href="categories/interview/tags/database.html">数据库</a>
+          <a href="categories/interview/tags/concurrency.html">并发</a>
       </div>
-      <a href="categories/ai.html">
-        人工智能
-      </a>
-      <a href="categories/literature.html">
-        文学创作
-      </a>
-      <a href="categories/essays.html">
-        个人随笔
-      </a></nav>
-    </div>
+    </div><a href="categories/ai.html">人工智能</a><a href="categories/literature.html">文学创作</a><a href="categories/essays.html">个人随笔</a></div>
+    </nav>
   </header>
   <div class="shell page-grid">
     <main>
-      <section class="hero">
-        <p class="eyebrow">PERSONAL BLOG</p>
-        <h1>在技术与文字之间，留下长期思考。</h1>
-        <p>这里收录 Java、人工智能、文学创作和个人随笔。</p>
+      <section class="hero editorial-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">EDITOR'S NOTE · 主编手记</p>
+          <h1>
+            <span>在技术与文字之间，</span>
+            <span>留下<strong>长期思考</strong>。</span>
+          </h1>
+          <p>记录 Java 与后端工程中的关键问题，也记录人工智能、文学创作和日常生活。不是追逐即时答案，而是建立一份可以反复修订的个人档案。</p>
+          <a class="hero-link" href="#latest">阅读最新文章</a>
+        </div>
+        <aside class="issue-note">
+          <span>壹</span>
+          <h2>答案会过期，思考过程值得保存。</h2>
+          <p>本期从 Java 集合、并发工具与 Optional 开始，也谈人与智能工具如何共同工作。</p>
+        </aside>
       </section>
-      <section>
-        <div class="section-heading"><h2>最新文章</h2></div>
+      <section id="latest">
+        <div class="section-heading">
+          <div><p class="eyebrow">LATEST WRITING</p><h2>最新文章</h2></div>
+          <span>共 25 篇</span>
+        </div>
         <ol class="article-list">
-    <li>
-      <a href="articles/interview/interiew20260610.html">
-        <span class="article-meta">面试题 · 2026-06-10</span>
-        <h2>20260610面试题</h2>
+    <li class="article-item">
+      <span class="article-number">01</span>
+      <div class="article-main">
+        <span class="article-meta">面试题</span>
+        <a href="articles/interview/interiew20260610.html">
+          <h2>20260610面试题</h2>
+        </a>
         <p>2026-06-10面试题</p>
-      </a>
+      </div>
+      <time class="article-date" datetime="2026-06-10">
+        2026.06.10
+      </time>
     </li>
-    <li>
-      <a href="articles/java/welcome-to-java.html">
-        <span class="article-meta">Java · 2026-06-10</span>
-        <h2>从这里开始记录 Java</h2>
+    <li class="article-item">
+      <span class="article-number">02</span>
+      <div class="article-main">
+        <span class="article-meta">Java</span>
+        <a href="articles/java/welcome-to-java.html">
+          <h2>从这里开始记录 Java</h2>
+        </a>
         <p>整理 Java 与后端工程学习中的关键问题。</p>
-      </a>
+      </div>
+      <time class="article-date" datetime="2026-06-10">
+        2026.06.10
+      </time>
     </li>
-    <li>
-      <a href="articles/java/why-use-optional-carefully.html">
-        <span class="article-meta">Java · 2026-06-10</span>
-        <h2>Optional 不是所有空值问题的答案</h2>
+    <li class="article-item">
+      <span class="article-number">03</span>
+      <div class="article-main">
+        <span class="article-meta">Java</span>
+        <a href="articles/java/why-use-optional-carefully.html">
+          <h2>Optional 不是所有空值问题的答案</h2>
+        </a>
         <p>记录在 Java 代码中使用 Optional 时应该保留的边界感。</p>
-      </a>
+      </div>
+      <time class="article-date" datetime="2026-06-10">
+        2026.06.10
+      </time>
     </li>
-    <li>
-      <a href="articles/ai/thinking-with-ai.html">
-        <span class="article-meta">人工智能 · 2026-06-08</span>
-        <h2>与人工智能一起思考</h2>
+    <li class="article-item">
+      <span class="article-number">04</span>
+      <div class="article-main">
+        <span class="article-meta">人工智能</span>
+        <a href="articles/ai/thinking-with-ai.html">
+          <h2>与人工智能一起思考</h2>
+        </a>
         <p>记录使用智能工具时的方法、边界与判断。</p>
-      </a>
+      </div>
+      <time class="article-date" datetime="2026-06-08">
+        2026.06.08
+      </time>
     </li>
-    <li>
-      <a href="articles/literature/a-summer-night.html">
-        <span class="article-meta">文学创作 · 2026-06-05</span>
-        <h2>夏夜短篇</h2>
+    <li class="article-item">
+      <span class="article-number">05</span>
+      <div class="article-main">
+        <span class="article-meta">文学创作</span>
+        <a href="articles/literature/a-summer-night.html">
+          <h2>夏夜短篇</h2>
+        </a>
         <p>一篇关于夜色、旧街与归途的短篇练习。</p>
-      </a>
+      </div>
+      <time class="article-date" datetime="2026-06-05">
+        2026.06.05
+      </time>
     </li>
-    <li>
-      <a href="articles/essays/why-i-write.html">
-        <span class="article-meta">个人随笔 · 2026-06-01</span>
-        <h2>为什么开始写博客</h2>
+    <li class="article-item">
+      <span class="article-number">06</span>
+      <div class="article-main">
+        <span class="article-meta">个人随笔</span>
+        <a href="articles/essays/why-i-write.html">
+          <h2>为什么开始写博客</h2>
+        </a>
         <p>为零散思考寻找一个可以长期沉淀的地方。</p>
-      </a>
+      </div>
+      <time class="article-date" datetime="2026-06-01">
+        2026.06.01
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">07</span>
+      <div class="article-main">
+        <span class="article-meta">面试题</span>
+        <a href="articles/interview/distributed-lock.html">
+          <h2>分布式锁需要回答哪些问题</h2>
+        </a>
+        <p>从互斥、超时、续期、所有权和故障恢复分析分布式锁。</p>
+      </div>
+      <time class="article-date" datetime="2026-04-11">
+        2026.04.11
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">08</span>
+      <div class="article-main">
+        <span class="article-meta">Java</span>
+        <a href="articles/java/transaction-boundaries.html">
+          <h2>Spring 事务边界不要只看注解</h2>
+        </a>
+        <p>从代理调用、异常类型和外部系统交互理解事务真正生效的范围。</p>
+      </div>
+      <time class="article-date" datetime="2026-03-19">
+        2026.03.19
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">09</span>
+      <div class="article-main">
+        <span class="article-meta">个人随笔</span>
+        <a href="articles/essays/yearly-review.html">
+          <h2>年度复盘不只是列出完成事项</h2>
+        </a>
+        <p>用选择、变化和未完成的问题重新理解过去一年。</p>
+      </div>
+      <time class="article-date" datetime="2026-03-02">
+        2026.03.02
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">10</span>
+      <div class="article-main">
+        <span class="article-meta">人工智能</span>
+        <a href="articles/ai/tool-calling-boundaries.html">
+          <h2>工具调用中的信任边界</h2>
+        </a>
+        <p>区分模型建议与系统权限，避免自动化流程产生不可逆副作用。</p>
+      </div>
+      <time class="article-date" datetime="2026-02-06">
+        2026.02.06
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">11</span>
+      <div class="article-main">
+        <span class="article-meta">文学创作</span>
+        <a href="articles/literature/spring-river.html">
+          <h2>春水经过石桥</h2>
+        </a>
+        <p>一篇关于返乡、河流与记忆的散文。</p>
+      </div>
+      <time class="article-date" datetime="2026-01-17">
+        2026.01.17
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">12</span>
+      <div class="article-main">
+        <span class="article-meta">面试题</span>
+        <a href="articles/interview/redis-cache.html">
+          <h2>缓存穿透、击穿和雪崩有什么区别</h2>
+        </a>
+        <p>对比三类缓存故障的触发条件、影响范围和应对方案。</p>
+      </div>
+      <time class="article-date" datetime="2025-12-04">
+        2025.12.04
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">13</span>
+      <div class="article-main">
+        <span class="article-meta">人工智能</span>
+        <a href="articles/ai/evaluate-model-output.html">
+          <h2>如何建立模型输出评估集</h2>
+        </a>
+        <p>用真实样本、明确标准和回归测试衡量模型能力变化。</p>
+      </div>
+      <time class="article-date" datetime="2025-11-16">
+        2025.11.16
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">14</span>
+      <div class="article-main">
+        <span class="article-meta">个人随笔</span>
+        <a href="articles/essays/walking-without-phone.html">
+          <h2>不带手机散步一小时</h2>
+        </a>
+        <p>一次暂时离开屏幕后，对注意力和城市细节的重新观察。</p>
+      </div>
+      <time class="article-date" datetime="2025-10-21">
+        2025.10.21
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">15</span>
+      <div class="article-main">
+        <span class="article-meta">文学创作</span>
+        <a href="articles/literature/rainy-bookstore.html">
+          <h2>雨天书店</h2>
+        </a>
+        <p>在一间临街书店里发生的安静相遇。</p>
+      </div>
+      <time class="article-date" datetime="2025-09-07">
+        2025.09.07
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">16</span>
+      <div class="article-main">
+        <span class="article-meta">Java</span>
+        <a href="articles/java/thread-pool-rejection.html">
+          <h2>线程池拒绝策略应该怎样选择</h2>
+        </a>
+        <p>比较四种内置拒绝策略，并分析生产环境中的降级与反压。</p>
+      </div>
+      <time class="article-date" datetime="2025-08-23">
+        2025.08.23
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">17</span>
+      <div class="article-main">
+        <span class="article-meta">面试题</span>
+        <a href="articles/interview/mysql-index.html">
+          <h2>MySQL 联合索引为什么遵循最左匹配</h2>
+        </a>
+        <p>从 B+ 树排序方式理解联合索引的查询边界。</p>
+      </div>
+      <time class="article-date" datetime="2025-07-12">
+        2025.07.12
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">18</span>
+      <div class="article-main">
+        <span class="article-meta">人工智能</span>
+        <a href="articles/ai/rag-quality.html">
+          <h2>RAG 效果不好时先检查检索</h2>
+        </a>
+        <p>从切分、召回、排序和上下文组织定位知识库问答质量问题。</p>
+      </div>
+      <time class="article-date" datetime="2025-06-27">
+        2025.06.27
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">19</span>
+      <div class="article-main">
+        <span class="article-meta">个人随笔</span>
+        <a href="articles/essays/digital-cleanup.html">
+          <h2>定期整理数字生活</h2>
+        </a>
+        <p>从文件、收藏和通知开始，减少长期积累的信息噪声。</p>
+      </div>
+      <time class="article-date" datetime="2025-06-03">
+        2025.06.03
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">20</span>
+      <div class="article-main">
+        <span class="article-meta">文学创作</span>
+        <a href="articles/literature/railway-station.html">
+          <h2>清晨的旧车站</h2>
+        </a>
+        <p>一篇描写小城车站、离别与重逢的短篇。</p>
+      </div>
+      <time class="article-date" datetime="2025-05-18">
+        2025.05.18
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">21</span>
+      <div class="article-main">
+        <span class="article-meta">面试题</span>
+        <a href="articles/interview/jvm-memory-areas.html">
+          <h2>JVM 运行时数据区面试梳理</h2>
+        </a>
+        <p>区分堆、虚拟机栈、方法区和程序计数器的职责与常见异常。</p>
+      </div>
+      <time class="article-date" datetime="2025-03-31">
+        2025.03.31
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">22</span>
+      <div class="article-main">
+        <span class="article-meta">Java</span>
+        <a href="articles/java/hashmap-capacity.html">
+          <h2>HashMap 容量为什么总是 2 的幂</h2>
+        </a>
+        <p>从索引计算、扩容迁移和散列分布理解 HashMap 的容量设计。</p>
+      </div>
+      <time class="article-date" datetime="2025-02-14">
+        2025.02.14
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">23</span>
+      <div class="article-main">
+        <span class="article-meta">个人随笔</span>
+        <a href="articles/essays/slow-learning.html">
+          <h2>接受学习是一件缓慢的事</h2>
+        </a>
+        <p>关于遗忘、重复和长期积累的学习体会。</p>
+      </div>
+      <time class="article-date" datetime="2025-02-02">
+        2025.02.02
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">24</span>
+      <div class="article-main">
+        <span class="article-meta">文学创作</span>
+        <a href="articles/literature/autumn-letter.html">
+          <h2>写给秋天的一封短信</h2>
+        </a>
+        <p>关于落叶、旧书和一场迟到问候的散文练习。</p>
+      </div>
+      <time class="article-date" datetime="2025-01-25">
+        2025.01.25
+      </time>
+    </li>
+    <li class="article-item">
+      <span class="article-number">25</span>
+      <div class="article-main">
+        <span class="article-meta">人工智能</span>
+        <a href="articles/ai/prompt-as-interface.html">
+          <h2>把提示词当作接口来设计</h2>
+        </a>
+        <p>用输入约束、输出结构和失败条件提高模型任务的稳定性。</p>
+      </div>
+      <time class="article-date" datetime="2025-01-09">
+        2025.01.09
+      </time>
     </li>
   </ol>
       </section></main>
@@ -110,46 +393,54 @@
       <section class="aside-card">
         <p class="eyebrow">ABOUT</p>
         <h2>关于这里</h2>
-        <p>记录技术学习、人工智能、文学创作与生活随想。</p>
+        <p>一份慢慢生长的个人刊物。写技术，也写那些无法被代码完全表达的事情。</p>
       </section>
       <section class="aside-card">
-        <p class="eyebrow">CATEGORIES</p>
+        <p class="eyebrow">INDEX</p>
+        <h2>分类索引</h2>
         <ul class="category-list">
     <li>
       <a href="categories/java.html">
         <span>Java</span>
-        <span>2</span>
+        <span>5</span>
       </a>
     </li>
     <li>
       <a href="categories/interview.html">
         <span>面试题</span>
-        <span>1</span>
+        <span>5</span>
       </a>
     </li>
     <li>
       <a href="categories/ai.html">
         <span>人工智能</span>
-        <span>1</span>
+        <span>5</span>
       </a>
     </li>
     <li>
       <a href="categories/literature.html">
         <span>文学创作</span>
-        <span>1</span>
+        <span>5</span>
       </a>
     </li>
     <li>
       <a href="categories/essays.html">
         <span>个人随笔</span>
-        <span>1</span>
+        <span>5</span>
       </a>
     </li></ul>
       </section>
+      <blockquote class="aside-quote">
+        <p>知识需要经过表达，才能从模糊印象变成可以复用的理解。</p>
+        <cite>远山手记 · 写作原则</cite>
+      </blockquote>
     </aside>
   </div>
   <footer class="site-footer">
-    <div class="shell">以 Markdown 写作，以网页阅读。</div>
+    <div class="shell footer-inner">
+      <span>© 2026 远山手记</span>
+      <span>愿每一次记录，都让理解更清楚一点。</span>
+    </div>
   </footer>
   <script src="assets/blog.js"></script>
 </body>

@@ -2,7 +2,10 @@ import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import matter from "gray-matter";
 import yaml from "js-yaml";
-import { CATEGORY_BY_LABEL } from "./config.js";
+import {
+  CATEGORY_BY_LABEL,
+  INTERVIEW_TAG_BY_LABEL
+} from "./config.js";
 
 const REQUIRED_FIELDS = ["title", "date", "category", "summary"];
 
@@ -61,6 +64,19 @@ export async function loadArticles(contentDirectory) {
     }
 
     const { date, dateText } = parseDate(parsed.data.date, sourcePath);
+    const tagLabels = Array.isArray(parsed.data.tags)
+      ? parsed.data.tags.map(String)
+      : [];
+    if (category.key === "interview" && tagLabels.length === 0) {
+      throw new Error(`${sourcePath}: interview article requires "tags"`);
+    }
+    const tags = tagLabels.map((label) => {
+      const tag = INTERVIEW_TAG_BY_LABEL.get(label);
+      if (!tag) {
+        throw new Error(`${sourcePath}: unknown interview tag "${label}"`);
+      }
+      return tag;
+    });
     const slug = path.basename(filename, ".md");
     const outputPath = path.posix.join(
       "articles",
@@ -79,6 +95,7 @@ export async function loadArticles(contentDirectory) {
       categoryLabel: category.label,
       date,
       dateText,
+      tags,
       slug,
       sourcePath,
       outputPath,

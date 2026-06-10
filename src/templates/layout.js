@@ -1,31 +1,18 @@
 import { hrefFrom } from "../paths.js";
 import { escapeHtml } from "./escape.js";
 
-function archiveMenu(interviewArchives, pagePath) {
-  if (interviewArchives.length === 0) {
-    return "";
-  }
-
+function interviewMenu(interviewTags, pagePath) {
+  const interviewHref = hrefFrom(pagePath, "categories/interview.html");
   return `
-    <button class="archive-toggle" type="button"
-      aria-label="展开面试题归档"
-      aria-expanded="false"
-      aria-controls="interview-archives">⌄</button>
-    <div class="archive-panel" id="interview-archives" hidden>
-      ${interviewArchives.map(({ year, months }) => `
-        <section class="archive-year">
-          <a class="archive-year-link"
-             href="${hrefFrom(pagePath, `categories/interview/${year}.html`)}">
-            ${escapeHtml(year)} 年
-          </a>
-          <div class="archive-months">
-            ${months.map(({ month }) => `
-              <a href="${hrefFrom(
-                pagePath,
-                `categories/interview/${year}/${month}.html`
-              )}">${escapeHtml(month)} 月</a>`).join("")}
-          </div>
-        </section>`).join("")}
+    <div class="topic-nav">
+      <a class="topic-trigger" href="${interviewHref}">面试题</a>
+      <div class="topic-panel" aria-label="面试题分类">
+        ${interviewTags.map((tag) => `
+          <a href="${hrefFrom(
+            pagePath,
+            `categories/interview/tags/${tag.key}.html`
+          )}">${escapeHtml(tag.label)}</a>`).join("")}
+      </div>
     </div>`;
 }
 
@@ -33,26 +20,19 @@ export function renderLayout({
   title,
   description,
   categories,
-  interviewArchives = [],
+  interviewTags = [],
   pagePath,
   content
 }) {
   const homeHref = hrefFrom(pagePath, "index.html");
   const menu = categories.map((category) => {
-    const link = `
-      <a href="${hrefFrom(pagePath, `categories/${category.key}.html`)}">
-        ${escapeHtml(category.label)}
-      </a>`;
-    if (category.key !== "interview") {
-      return link;
+    if (category.key === "interview") {
+      return interviewMenu(interviewTags, pagePath);
     }
-    return `
-      <div class="archive-nav">
-        <div class="archive-nav-label">
-          ${link}
-          ${archiveMenu(interviewArchives, pagePath)}
-        </div>
-      </div>`;
+    return `<a href="${hrefFrom(
+      pagePath,
+      `categories/${category.key}.html`
+    )}">${escapeHtml(category.label)}</a>`;
   }).join("");
   const sidebar = categories.map((category) => `
     <li>
@@ -73,10 +53,22 @@ export function renderLayout({
 </head>
 <body id="top">
   <header class="site-header">
-    <div class="shell header-inner">
-      <a class="brand" href="${homeHref}">远山手记</a>
-      <nav aria-label="主要导航">${menu}</nav>
+    <div class="shell masthead-meta">
+      <span>二〇二六年六月 · 第一期</span>
+      <span>技术与文字的个人刊物</span>
+      <span>以 Markdown 写作，以网页阅读</span>
     </div>
+    <div class="shell brand-row">
+      <p>远山不语<br>文字自有回声</p>
+      <a class="brand" href="${homeHref}">
+        远山手记
+        <small>Notes from distant mountains</small>
+      </a>
+      <p>Java · AI<br>文学 · 随笔</p>
+    </div>
+    <nav class="primary-nav" aria-label="主要导航">
+      <div class="shell nav-inner">${menu}</div>
+    </nav>
   </header>
   <div class="shell page-grid">
     <main>${content}</main>
@@ -84,16 +76,24 @@ export function renderLayout({
       <section class="aside-card">
         <p class="eyebrow">ABOUT</p>
         <h2>关于这里</h2>
-        <p>记录技术学习、人工智能、文学创作与生活随想。</p>
+        <p>一份慢慢生长的个人刊物。写技术，也写那些无法被代码完全表达的事情。</p>
       </section>
       <section class="aside-card">
-        <p class="eyebrow">CATEGORIES</p>
+        <p class="eyebrow">INDEX</p>
+        <h2>分类索引</h2>
         <ul class="category-list">${sidebar}</ul>
       </section>
+      <blockquote class="aside-quote">
+        <p>知识需要经过表达，才能从模糊印象变成可以复用的理解。</p>
+        <cite>远山手记 · 写作原则</cite>
+      </blockquote>
     </aside>
   </div>
   <footer class="site-footer">
-    <div class="shell">以 Markdown 写作，以网页阅读。</div>
+    <div class="shell footer-inner">
+      <span>© 2026 远山手记</span>
+      <span>愿每一次记录，都让理解更清楚一点。</span>
+    </div>
   </footer>
   <script src="${hrefFrom(pagePath, "assets/blog.js")}"></script>
 </body>

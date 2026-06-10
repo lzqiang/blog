@@ -5,14 +5,14 @@ import { renderLayout } from "./layout.js";
 export function renderCategoryPage({
   category,
   categories,
-  interviewArchives = [],
+  interviewTags = [],
   pagePath
 }) {
   return renderLayout({
     title: category.label,
     description: category.description,
     categories,
-    interviewArchives,
+    interviewTags,
     pagePath,
     content: `
       <header class="page-heading">
@@ -24,26 +24,24 @@ export function renderCategoryPage({
   });
 }
 
-export function renderArchivePage({
-  title,
-  description,
-  articles,
+export function renderInterviewTagPage({
+  tag,
   categories,
-  interviewArchives = [],
+  interviewTags,
   pagePath
 }) {
   return renderLayout({
-    title,
-    description,
+    title: `面试题 · ${tag.label}`,
+    description: `${tag.label} 相关面试题。`,
     categories,
-    interviewArchives,
+    interviewTags,
     pagePath,
     content: `
       <header class="page-heading">
-        <p class="eyebrow">INTERVIEW ARCHIVE</p>
-        <h1>${escapeHtml(title)}</h1>
-        <p>${escapeHtml(description)}</p>
+        <p class="eyebrow">INTERVIEW TAG</p>
+        <h1>面试题 · ${escapeHtml(tag.label)}</h1>
+        <p>${escapeHtml(tag.label)} 相关面试题，共 ${tag.articles.length} 篇。</p>
       </header>
-      ${articleList(articles, pagePath)}`
+      ${articleList(tag.articles, pagePath)}`
   });
 }
