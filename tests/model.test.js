@@ -48,3 +48,84 @@ test("does not link adjacent articles across categories", () => {
     next: null
   });
 });
+
+test("groups only interview archives by descending year and month", () => {
+  const interview202702Older = article(
+    "interview-2027-02-older",
+    "2027-02-01",
+    "interview"
+  );
+  const interview202606 = article(
+    "interview-2026-06",
+    "2026-06-15",
+    "interview"
+  );
+  const interview202601 = article(
+    "interview-2026-01",
+    "2026-01-20",
+    "interview"
+  );
+  const interview202702Newer = article(
+    "interview-2027-02-newer",
+    "2027-02-20",
+    "interview"
+  );
+  const java202703 = article("java-2027-03", "2027-03-01");
+
+  const model = buildSiteModel([
+    interview202601,
+    interview202702Older,
+    java202703,
+    interview202606,
+    interview202702Newer
+  ]);
+
+  assert.deepEqual(
+    model.interviewArchives.map(({ year, months, articles }) => ({
+      year,
+      months: months.map(({ month, articles: monthArticles }) => ({
+        month,
+        articles: monthArticles.map(({ title }) => title)
+      })),
+      articles: articles.map(({ title }) => title)
+    })),
+    [
+      {
+        year: "2027",
+        months: [
+          {
+            month: "02",
+            articles: [
+              "interview-2027-02-newer",
+              "interview-2027-02-older"
+            ]
+          }
+        ],
+        articles: [
+          "interview-2027-02-newer",
+          "interview-2027-02-older"
+        ]
+      },
+      {
+        year: "2026",
+        months: [
+          {
+            month: "06",
+            articles: ["interview-2026-06"]
+          },
+          {
+            month: "01",
+            articles: ["interview-2026-01"]
+          }
+        ],
+        articles: ["interview-2026-06", "interview-2026-01"]
+      }
+    ]
+  );
+});
+
+test("returns empty interview archives when there are no interview articles", () => {
+  const model = buildSiteModel([article("java", "2027-03-01")]);
+
+  assert.deepEqual(model.interviewArchives, []);
+});
