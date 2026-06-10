@@ -30,6 +30,7 @@ export function renderHomePage({
   interviewTags = [],
   pagePath
 }) {
+  const latestArticles = articles.slice(0, 10);
   return renderLayout({
     title: "首页",
     description: "技术、人工智能、文学创作与个人随笔。",
@@ -56,9 +57,9 @@ export function renderHomePage({
       <section id="latest">
         <div class="section-heading">
           <div><p class="eyebrow">LATEST WRITING</p><h2>最新文章</h2></div>
-          <span>共 ${articles.length} 篇</span>
+          <span>最新 ${latestArticles.length} / 共 ${articles.length} 篇</span>
         </div>
-        ${articleList(articles, pagePath)}
+        ${articleList(latestArticles, pagePath)}
       </section>`
   });
 }
