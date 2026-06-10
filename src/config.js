@@ -26,10 +26,6 @@ export const CATEGORIES = Object.freeze([
   }
 ]);
 
-export const CATEGORY_BY_KEY = new Map(
-  CATEGORIES.map((category) => [category.key, category])
-);
-
 export const CATEGORY_BY_LABEL = new Map(
   CATEGORIES.map((category) => [category.label, category])
 );

@@ -1,16 +1,8 @@
 # 远山手记
 
-这是一个个人静态博客。文章用 Markdown 编写，运行构建命令后生成可直接打开的网页文件。
+这是一个个人静态博客。文章用 Markdown 编写，Node.js 构建器会把内容生成到 `dist/`。
 
-当前博客包含五个分类：
-
-- Java
-- 面试题
-- 人工智能
-- 文学创作
-- 个人随笔
-
-生成后的入口是根目录的 `index.html`。可以直接双击打开，也可以部署到 GitHub Pages 这类静态托管服务。
+仓库主要保留源码、Markdown 原文和静态资源源文件；`dist/` 是部署产物。
 
 ## 快速开始
 
@@ -29,10 +21,33 @@ npm run build
 本地查看：
 
 ```bash
-open index.html
+open dist/index.html
 ```
 
-也可以直接在文件管理器中双击 `index.html`。
+## 项目结构
+
+```text
+.
+├── content/                # Markdown 原文
+├── static/                 # CSS 和浏览器脚本源文件
+├── src/                    # 静态站点生成器源码
+├── scripts/build.js        # 构建入口
+├── dist/                   # 构建生成的完整静态站点，不提交
+├── package.json
+└── package-lock.json
+```
+
+构建后 `dist/` 中会包含：
+
+```text
+dist/
+├── index.html
+├── articles/
+├── categories/
+└── assets/
+```
+
+`assets/` 只包含 CSS 和 JS，不是完整站点。部署时应部署整个 `dist/`。
 
 ## 写一篇文章
 
@@ -67,94 +82,89 @@ summary: 梳理线程、锁和并发工具的核心概念。
 - `title`：文章标题
 - `date`：发布日期，格式必须是 `YYYY-MM-DD`
 - `category`：只能是 `Java`、`面试题`、`人工智能`、`文学创作`、`个人随笔`
-- `summary`：首页和分类页显示的摘要
+- `summary`：首页和列表页显示的摘要
 
-写完后运行：
+面试题文章还需要 `tags`：
 
-```bash
-npm run build
+```markdown
+tags:
+  - Java
+  - 数据库
 ```
 
-构建会更新：
-
-- `index.html`
-- `articles/`
-- `categories/`
-- `assets/`
-
-## 项目结构
-
-```text
-.
-├── index.html              # 生成后的博客首页
-├── articles/               # 生成后的文章页
-├── categories/             # 生成后的分类页
-├── assets/                 # 生成后的静态资源
-├── content/                # Markdown 原文
-├── static/                 # 样式和前端脚本源文件
-├── src/                    # 静态站点生成器源码
-├── scripts/build.js        # 构建入口
-└── tests/                  # 自动化测试
-```
+可用标签：`Java`、`Vue`、`AI`、`队列`、`数据库`、`并发`。
 
 ## 构建规则
 
-构建器会做这些事：
+执行 `npm run build` 时：
 
 1. 扫描 `content/` 下的 Markdown 文件。
-2. 校验文章标题、日期、分类和摘要。
+2. 校验文章标题、日期、分类、摘要和面试题标签。
 3. 将 Markdown 渲染成 HTML。
-4. 为文章标题生成目录锚点。
-5. 生成首页、分类页和文章页。
-6. 为同一分类内的文章生成上一篇和下一篇导航。
-7. 复制本地静态资源，确保生成结果不依赖远程 CDN。
+4. 生成首页、分类页、面试题标签页和文章页。
+5. 为同一分类内的文章生成上一篇和下一篇导航。
+6. 复制 `static/` 到 `dist/assets/`。
 
-如果文章元数据不合法，构建会失败并指出具体文件。
+首页“最新文章”只显示最新 10 篇；分类页和标签页显示完整列表。
 
-## 测试
+## 部署到 Nginx
 
-运行全部测试：
+Nginx 的 `root` 应指向 `dist/`：
 
-```bash
-npm test
+```nginx
+server {
+    listen 80;
+    server_name example.com;
+    root /var/www/blog/dist;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
 ```
 
-测试覆盖内容解析、日期校验、分类校验、Markdown 渲染、相对链接、页面模板和完整构建流程。
-
-## 部署到 GitHub Pages
-
-这个仓库会提交生成后的静态文件。推送到 GitHub 后，可以在仓库设置里启用 GitHub Pages：
-
-1. 打开 GitHub 仓库设置。
-2. 进入 `Pages`。
-3. Source 选择 `Deploy from a branch`。
-4. Branch 选择 `master`，目录选择 `/root`。
-5. 保存后等待 GitHub Pages 构建完成。
-
-之后每次更新文章：
+手动部署示例：
 
 ```bash
 npm run build
-git add content index.html articles categories assets
-git commit -m "docs: update blog posts"
-git push
+rsync -av --delete dist/ /var/www/blog/dist/
+```
+
+CI/CD 示例：
+
+```bash
+npm ci
+npm run build
+# 上传 dist/
+```
+
+## 提交代码
+
+推荐提交源码和内容，不提交构建产物：
+
+```bash
+git add content static src scripts package.json package-lock.json README.md
+git commit -m "docs: update blog"
 ```
 
 ## 常见问题
 
-### 为什么要运行 `npm run build`？
+### 是 `nvm run build` 吗？
 
-浏览器直接打开本地 `index.html` 时，通常不能自由读取磁盘上的 Markdown 文件。这个项目会提前把 Markdown 编译成 HTML，所以生成结果可以直接打开，也更适合静态部署。
-
-### 能不能只提交 Markdown？
-
-不建议。GitHub Pages 需要最终的 HTML 文件才能直接展示这个博客。推荐同时提交 Markdown 原文和生成后的 HTML。
-
-### 如何新增分类？
-
-修改 `src/config.js` 中的 `CATEGORIES`，然后在 `content/` 下新增对应目录，并运行：
+通常不是。`nvm` 用来选择 Node.js 版本，构建命令是：
 
 ```bash
-npm test
 npm run build
 ```
+
+如果你想指定 Node 版本，可以先执行：
+
+```bash
+nvm use 20
+npm run build
+```
+
+### 能不能只把 assets 放进 Nginx？
+
+不能。`assets/` 只有样式和脚本。完整站点还需要 `index.html`、`articles/` 和 `categories/`，所以要部署整个 `dist/`。

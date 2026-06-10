@@ -10,7 +10,7 @@ const rootDirectory = path.resolve(
 try {
   const model = await buildSite({ rootDirectory });
   console.log(
-    `Built ${model.articles.length} article(s) in ${model.categories.length} categories.`
+    `Built ${model.articles.length} article(s) in ${model.categories.length} categories to dist/.`
   );
 } catch (error) {
   console.error(`Build failed: ${error.message}`);

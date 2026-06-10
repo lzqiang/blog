@@ -19,7 +19,8 @@ async function writeOutput(rootDirectory, outputPath, contents) {
 export async function buildSite({
   rootDirectory,
   contentDirectory = path.join(rootDirectory, "content"),
-  staticDirectory = path.join(rootDirectory, "static")
+  staticDirectory = path.join(rootDirectory, "static"),
+  outputDirectory = path.join(rootDirectory, "dist")
 }) {
   const loaded = await loadArticles(contentDirectory);
   const rendered = loaded.map((article) => ({
@@ -28,14 +29,10 @@ export async function buildSite({
   }));
   const model = buildSiteModel(rendered);
 
-  await Promise.all([
-    rm(path.join(rootDirectory, "articles"), { recursive: true, force: true }),
-    rm(path.join(rootDirectory, "categories"), { recursive: true, force: true }),
-    rm(path.join(rootDirectory, "assets"), { recursive: true, force: true })
-  ]);
+  await rm(outputDirectory, { recursive: true, force: true });
 
   await writeOutput(
-    rootDirectory,
+    outputDirectory,
     "index.html",
     renderHomePage({
       categories: model.categories,
@@ -48,7 +45,7 @@ export async function buildSite({
   for (const category of model.categories) {
     const pagePath = `categories/${category.key}.html`;
     await writeOutput(
-      rootDirectory,
+      outputDirectory,
       pagePath,
       renderCategoryPage({
         category,
@@ -62,7 +59,7 @@ export async function buildSite({
   for (const tag of model.interviewTags) {
     const pagePath = `categories/interview/tags/${tag.key}.html`;
     await writeOutput(
-      rootDirectory,
+      outputDirectory,
       pagePath,
       renderInterviewTagPage({
         tag,
@@ -75,7 +72,7 @@ export async function buildSite({
 
   for (const article of model.articles) {
     await writeOutput(
-      rootDirectory,
+      outputDirectory,
       article.outputPath,
       renderArticlePage({
         article,
@@ -87,7 +84,7 @@ export async function buildSite({
     );
   }
 
-  await cp(staticDirectory, path.join(rootDirectory, "assets"), {
+  await cp(staticDirectory, path.join(outputDirectory, "assets"), {
     recursive: true
   });
   return model;
