@@ -1,18 +1,59 @@
 import { hrefFrom } from "../paths.js";
 import { escapeHtml } from "./escape.js";
 
+function archiveMenu(interviewArchives, pagePath) {
+  if (interviewArchives.length === 0) {
+    return "";
+  }
+
+  return `
+    <button class="archive-toggle" type="button"
+      aria-label="展开面试题归档"
+      aria-expanded="false"
+      aria-controls="interview-archives">⌄</button>
+    <div class="archive-panel" id="interview-archives" hidden>
+      ${interviewArchives.map(({ year, months }) => `
+        <section class="archive-year">
+          <a class="archive-year-link"
+             href="${hrefFrom(pagePath, `categories/interview/${year}.html`)}">
+            ${escapeHtml(year)} 年
+          </a>
+          <div class="archive-months">
+            ${months.map(({ month }) => `
+              <a href="${hrefFrom(
+                pagePath,
+                `categories/interview/${year}/${month}.html`
+              )}">${escapeHtml(month)} 月</a>`).join("")}
+          </div>
+        </section>`).join("")}
+    </div>`;
+}
+
 export function renderLayout({
   title,
   description,
   categories,
+  interviewArchives = [],
   pagePath,
   content
 }) {
   const homeHref = hrefFrom(pagePath, "index.html");
-  const menu = categories.map((category) => `
-    <a href="${hrefFrom(pagePath, `categories/${category.key}.html`)}">
-      ${escapeHtml(category.label)}
-    </a>`).join("");
+  const menu = categories.map((category) => {
+    const link = `
+      <a href="${hrefFrom(pagePath, `categories/${category.key}.html`)}">
+        ${escapeHtml(category.label)}
+      </a>`;
+    if (category.key !== "interview") {
+      return link;
+    }
+    return `
+      <div class="archive-nav">
+        <div class="archive-nav-label">
+          ${link}
+          ${archiveMenu(interviewArchives, pagePath)}
+        </div>
+      </div>`;
+  }).join("");
   const sidebar = categories.map((category) => `
     <li>
       <a href="${hrefFrom(pagePath, `categories/${category.key}.html`)}">

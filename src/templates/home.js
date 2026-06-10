@@ -18,11 +18,17 @@ export function articleList(articles, pagePath) {
   </ol>`;
 }
 
-export function renderHomePage({ categories, articles, pagePath }) {
+export function renderHomePage({
+  categories,
+  articles,
+  interviewArchives = [],
+  pagePath
+}) {
   return renderLayout({
     title: "首页",
     description: "技术、人工智能、文学创作与个人随笔。",
     categories,
+    interviewArchives,
     pagePath,
     content: `
       <section class="hero">

@@ -15,6 +15,7 @@ export function renderArticlePage({
   article,
   categories,
   adjacent,
+  interviewArchives = [],
   pagePath
 }) {
   const toc = article.toc.length === 0 ? "" : `
@@ -31,6 +32,7 @@ export function renderArticlePage({
     title: article.title,
     description: article.summary,
     categories,
+    interviewArchives,
     pagePath,
     content: `
       <article>
