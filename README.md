@@ -2,9 +2,10 @@
 
 这是一个个人静态博客。文章用 Markdown 编写，运行构建命令后生成可直接打开的网页文件。
 
-当前博客包含四个分类：
+当前博客包含五个分类：
 
 - Java
+- 面试题
 - 人工智能
 - 文学创作
 - 个人随笔
@@ -40,6 +41,7 @@ open index.html
 ```text
 content/
 ├── java/
+├── interview/
 ├── ai/
 ├── literature/
 └── essays/
@@ -64,7 +66,7 @@ summary: 梳理线程、锁和并发工具的核心概念。
 
 - `title`：文章标题
 - `date`：发布日期，格式必须是 `YYYY-MM-DD`
-- `category`：只能是 `Java`、`人工智能`、`文学创作`、`个人随笔`
+- `category`：只能是 `Java`、`面试题`、`人工智能`、`文学创作`、`个人随笔`
 - `summary`：首页和分类页显示的摘要
 
 写完后运行：

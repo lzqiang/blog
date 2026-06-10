@@ -44,6 +44,7 @@ summary: 用于完整构建测试
   assert.match(article, /第一节/);
   assert.doesNotMatch(home + article, /https?:\/\//);
   await access(path.join(root, "categories/ai.html"));
+  await access(path.join(root, "categories/interview.html"));
   await access(path.join(root, "assets/styles.css"));
   await access(path.join(root, "assets/blog.js"));
 });

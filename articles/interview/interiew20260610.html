@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="2026-06-10面试题">
+  <title>20260610面试题 · 远山手记</title>
+  <link rel="stylesheet" href="../../assets/styles.css">
+</head>
+<body id="top">
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="../../index.html">远山手记</a>
+      <nav aria-label="主要导航">
+    <a href="../../categories/java.html">
+      Java
+    </a>
+    <a href="../../categories/interview.html">
+      面试题
+    </a>
+    <a href="../../categories/ai.html">
+      人工智能
+    </a>
+    <a href="../../categories/literature.html">
+      文学创作
+    </a>
+    <a href="../../categories/essays.html">
+      个人随笔
+    </a></nav>
+    </div>
+  </header>
+  <div class="shell page-grid">
+    <main>
+      <article>
+        <header class="article-header">
+          <a class="article-category"
+             href="../../categories/interview.html">
+            面试题
+          </a>
+          <h1>20260610面试题</h1>
+          <p>2026-06-10面试题</p>
+          <time datetime="2026-06-10">2026-06-10</time>
+        </header>
+        
+    <nav class="article-toc" aria-label="文章目录">
+      <p class="eyebrow">CONTENTS</p>
+      <ol>
+        <li class="toc-level-2">
+          <a href="#1-hashmap-%E5%92%8C-treemap-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">1. `HashMap` 和 `TreeMap` 有什么区别？</a>
+        </li>
+        <li class="toc-level-2">
+          <a href="#2-%E7%BA%A2%E9%BB%91%E6%A0%91%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%94%E6%99%AE%E9%80%9A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%A8%B3%E5%AE%9A">2. 红黑树为什么比普通二叉搜索树稳定？</a>
+        </li>
+        <li class="toc-level-2">
+          <a href="#3-reentrantreadwritelock-%E9%80%82%E5%90%88%E4%BB%80%E4%B9%88%E5%9C%BA%E6%99%AF">3. `ReentrantReadWriteLock` 适合什么场景？</a>
+        </li>
+        <li class="toc-level-2">
+          <a href="#4-stampedlock-%E5%92%8C%E8%AF%BB%E5%86%99%E9%94%81%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">4. `StampedLock` 和读写锁有什么区别？</a>
+        </li>
+        <li class="toc-level-2">
+          <a href="#5-concurrentlinkedqueue-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8">5. `ConcurrentLinkedQueue` 如何实现线程安全？</a>
+        </li>
+        <li class="toc-level-2">
+          <a href="#6-arrayblockingqueue-%E5%92%8C-linkedblockingqueue-%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9">6. `ArrayBlockingQueue` 和 `LinkedBlockingQueue` 如何选择？</a>
+        </li>
+        <li class="toc-level-2">
+          <a href="#7-%E7%BA%BF%E7%A8%8B%E6%B1%A0%E9%98%9F%E5%88%97%E5%AE%B9%E9%87%8F%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1">7. 线程池队列容量应该如何设计？</a>
+        </li>
+        <li class="toc-level-2">
+          <a href="#8-java-%E6%8E%A5%E5%8F%A3%E5%B9%B3%E5%9D%87%E8%80%97%E6%97%B6%E6%AD%A3%E5%B8%B8%E4%BD%86-p99-%E5%BE%88%E9%AB%98%E5%8F%AF%E8%83%BD%E6%98%AF%E4%BB%80%E4%B9%88%E5%8E%9F%E5%9B%A0">8. Java 接口平均耗时正常，但 P99 很高，可能是什么原因？</a>
+        </li>
+        <li class="toc-level-2">
+          <a href="#9-%E7%83%AD%E7%82%B9%E7%BC%93%E5%AD%98%E5%A4%B1%E6%95%88%E6%97%B6%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%A4%A7%E9%87%8F%E8%AF%B7%E6%B1%82%E5%9B%9E%E6%BA%90">9. 热点缓存失效时如何避免大量请求回源？</a>
+        </li>
+        <li class="toc-level-2">
+          <a href="#10-%E7%83%AD%E7%82%B9%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%E5%AF%BC%E8%87%B4%E6%95%B0%E6%8D%AE%E5%BA%93%E8%B4%9F%E8%BD%BD%E9%A3%99%E5%8D%87%E5%A6%82%E4%BD%95%E5%BA%94%E6%80%A5%E5%A4%84%E7%90%86">10. 热点缓存击穿导致数据库负载飙升，如何应急处理？</a>
+        </li>
+      </ol>
+    </nav>
+        <div class="prose"><h1>2026-06-10面试题</h1>
+<h2 id="1-hashmap-和-treemap-有什么区别">1. <code>HashMap</code> 和 <code>TreeMap</code> 有什么区别？</h2>
+<p><strong>答案：</strong></p>
+<p><code>HashMap</code> 基于哈希表，平均查询复杂度接近 O(1)，不保证遍历顺序，允许一个 <code>null</code> key。</p>
+<p><code>TreeMap</code> 基于红黑树，查询复杂度为 O(log n)，会按照 key 的自然顺序或指定的 <code>Comparator</code> 排序，通常不允许 <code>null</code> key。</p>
+<p>选择建议：</p>
+<ul>
+<li>需要快速按 key 查询时使用 <code>HashMap</code>。</li>
+<li>需要排序、范围查询或查找邻近 key 时使用 <code>TreeMap</code>。</li>
+</ul>
+<p>既然 <code>TreeMap</code> 使用红黑树，下一题继续看：红黑树为什么适合工程实现？</p>
+<h2 id="2-红黑树为什么比普通二叉搜索树稳定">2. 红黑树为什么比普通二叉搜索树稳定？</h2>
+<p><strong>答案：</strong></p>
+<p>普通二叉搜索树在连续插入有序数据时，可能退化成链表，查询复杂度从 O(log n) 降为 O(n)。</p>
+<p>红黑树通过颜色规则和旋转操作保持近似平衡，使树高始终受控，因此查询、插入和删除的复杂度都能保持在 O(log n)。</p>
+<p>红黑树没有追求绝对平衡，所以插入、删除时的调整成本通常低于严格平衡树。</p>
+<p>它适合需要频繁增删查的通用场景，例如：</p>
+<ul>
+<li><code>TreeMap</code></li>
+<li><code>TreeSet</code></li>
+<li>JDK 8 中发生严重哈希冲突后的 <code>HashMap</code></li>
+</ul>
+<p>树结构解决了查找效率问题，而并发读写还需要安全控制。下一题看读写锁。</p>
+<h2 id="3-reentrantreadwritelock-适合什么场景">3. <code>ReentrantReadWriteLock</code> 适合什么场景？</h2>
+<p><strong>答案：</strong></p>
+<p><code>ReentrantReadWriteLock</code> 提供读锁和写锁：</p>
+<ul>
+<li>多个线程可以同时持有读锁。</li>
+<li>写锁与其他写锁互斥。</li>
+<li>写锁与所有读锁互斥。</li>
+</ul>
+<p>它适合读多写少，并且临界区执行时间相对较长的场景。</p>
+<p>如果写操作频繁或临界区很短，维护读写锁的成本可能高于普通互斥锁。</p>
+<p>还要注意锁升级问题。线程持有读锁时直接申请写锁，可能导致死锁。通常应先释放读锁，再尝试获取写锁。</p>
+<p>读多写少场景还可以使用乐观读。下一题继续看 <code>StampedLock</code>。</p>
+<h2 id="4-stampedlock-和读写锁有什么区别">4. <code>StampedLock</code> 和读写锁有什么区别？</h2>
+<p><strong>答案：</strong></p>
+<p><code>StampedLock</code> 支持三种模式：</p>
+<ul>
+<li>写锁。</li>
+<li>悲观读锁。</li>
+<li>乐观读。</li>
+</ul>
+<p>乐观读不会真正阻塞写线程。读取数据后，需要使用 stamp 校验读取期间是否发生过写入；如果校验失败，再升级为悲观读。</p>
+<pre><code class="hljs language-java"><span class="hljs-type">long</span> <span class="hljs-variable">stamp</span> <span class="hljs-operator">=</span> lock.tryOptimisticRead();
+<span class="hljs-type">int</span> <span class="hljs-variable">value</span> <span class="hljs-operator">=</span> data;
+
+<span class="hljs-keyword">if</span> (!lock.validate(stamp)) {
+    stamp = lock.readLock();
+    <span class="hljs-keyword">try</span> {
+        value = data;
+    } <span class="hljs-keyword">finally</span> {
+        lock.unlockRead(stamp);
+    }
+}
+</code></pre>
+<p><code>StampedLock</code> 的特点：</p>
+<ul>
+<li>乐观读可以提高读多写少场景的吞吐量。</li>
+<li>它不可重入。</li>
+<li>使用方式比普通读写锁复杂。</li>
+<li>必须正确保存和释放 stamp。</li>
+</ul>
+<p>并发控制不仅涉及锁，还涉及无锁容器。下一题看 <code>ConcurrentLinkedQueue</code>。</p>
+<h2 id="5-concurrentlinkedqueue-如何实现线程安全">5. <code>ConcurrentLinkedQueue</code> 如何实现线程安全？</h2>
+<p><strong>答案：</strong></p>
+<p><code>ConcurrentLinkedQueue</code> 是基于链表实现的无界非阻塞队列。</p>
+<p>它主要通过 CAS 更新头尾节点，不需要给整个队列加互斥锁。竞争失败的线程会重新读取状态并重试。</p>
+<p>优点：</p>
+<ul>
+<li>无锁实现，高并发下通常具有较好吞吐量。</li>
+<li>不会因为一个线程持有锁而阻塞所有其他线程。</li>
+</ul>
+<p>限制：</p>
+<ul>
+<li>它是无界队列，无法通过容量形成反压。</li>
+<li>不提供阻塞等待能力。</li>
+<li><code>size()</code> 需要遍历队列，开销较大。</li>
+</ul>
+<p>需要阻塞或明确容量限制时，可以选择 <code>ArrayBlockingQueue</code>、<code>LinkedBlockingQueue</code> 等。</p>
+<p>下一题继续比较两种常见阻塞队列。</p>
+<h2 id="6-arrayblockingqueue-和-linkedblockingqueue-如何选择">6. <code>ArrayBlockingQueue</code> 和 <code>LinkedBlockingQueue</code> 如何选择？</h2>
+<p><strong>答案：</strong></p>
+<p><code>ArrayBlockingQueue</code> 基于固定长度数组，创建时必须指定容量。</p>
+<p>特点：</p>
+<ul>
+<li>容量边界明确。</li>
+<li>内存连续。</li>
+<li>不需要为每个元素创建链表节点。</li>
+<li>生产和消费通常竞争同一把锁。</li>
+</ul>
+<p><code>LinkedBlockingQueue</code> 基于链表，可以指定容量。</p>
+<p>特点：</p>
+<ul>
+<li>生产和消费使用不同锁，并发吞吐可能更好。</li>
+<li>每个节点有额外内存开销。</li>
+<li>如果不指定容量，默认容量非常大，容易导致任务堆积和 OOM。</li>
+</ul>
+<p>选择建议：</p>
+<ul>
+<li>强调严格容量和可控内存时，优先考虑 <code>ArrayBlockingQueue</code>。</li>
+<li>生产和消费并发较高、容量也有明确限制时，可以考虑 <code>LinkedBlockingQueue</code>。</li>
+<li>生产环境必须明确队列容量。</li>
+</ul>
+<p>队列容量会直接影响线程池行为。下一题看线程池队列容量如何设计。</p>
+<h2 id="7-线程池队列容量应该如何设计">7. 线程池队列容量应该如何设计？</h2>
+<p><strong>答案：</strong></p>
+<p>线程池队列容量应结合以下因素设计：</p>
+<ul>
+<li>峰值任务到达速率。</li>
+<li>单个任务平均处理时间。</li>
+<li>允许的最大等待时间。</li>
+<li>下游服务承载能力。</li>
+<li>最大可用内存。</li>
+</ul>
+<p>可以用 Little’s Law 做初步估算：</p>
+<pre><code class="hljs language-text">系统中的平均任务数 ≈ 任务到达速率 × 平均停留时间
+</code></pre>
+<p>但最终仍需要通过压测验证。</p>
+<p>队列太小会导致频繁拒绝；队列太大则会隐藏系统过载，让任务长时间排队，最终拉高 P99 延迟甚至导致 OOM。</p>
+<p>需要同时监控：</p>
+<ul>
+<li>当前队列长度。</li>
+<li>任务等待时间。</li>
+<li>活跃线程数。</li>
+<li>拒绝次数。</li>
+<li>任务执行时间。</li>
+</ul>
+<p>队列积压通常首先表现为尾延迟升高。下一题看平均耗时正常但 P99 很高的原因。</p>
+<h2 id="8-java-接口平均耗时正常但-p99-很高可能是什么原因">8. Java 接口平均耗时正常，但 P99 很高，可能是什么原因？</h2>
+<p><strong>答案：</strong></p>
+<p>平均值会掩盖少量非常慢的请求。常见原因包括：</p>
+<ul>
+<li>偶发 Full GC。</li>
+<li>数据库连接池等待。</li>
+<li>线程池任务排队。</li>
+<li>数据库锁等待。</li>
+<li>少量慢 SQL。</li>
+<li>下游接口超时和重试。</li>
+<li>热点缓存失效。</li>
+<li>少量超大请求或返回数据。</li>
+</ul>
+<p>排查时应该抽取 P99 请求的 traceId，分解以下耗时：</p>
+<ul>
+<li>线程池等待时间。</li>
+<li>数据库执行时间。</li>
+<li>Redis 访问时间。</li>
+<li>HTTP 下游调用时间。</li>
+<li>JSON 序列化时间。</li>
+</ul>
+<p>再把慢请求的时间点与 GC、CPU、连接池和线程池指标对齐。</p>
+<p>如果慢请求集中发生在缓存失效时，下一题就需要考虑热点 key 重建问题。</p>
+<h2 id="9-热点缓存失效时如何避免大量请求回源">9. 热点缓存失效时如何避免大量请求回源？</h2>
+<p><strong>答案：</strong></p>
+<p>可以使用互斥重建，只允许一个线程查询数据库并刷新缓存，其他线程等待、快速失败或暂时返回旧值。</p>
+<p>还可以使用逻辑过期：</p>
+<ol>
+<li>缓存中保存业务数据和逻辑过期时间。</li>
+<li>数据逻辑过期后，前台仍返回旧数据。</li>
+<li>后台线程异步刷新缓存。</li>
+</ol>
+<p>对于极少变化的热点数据，也可以不设置物理过期时间，通过定时任务主动刷新。</p>
+<p>无论使用哪种方式，都要考虑：</p>
+<ul>
+<li>重建锁的超时时间。</li>
+<li>获取锁失败后的行为。</li>
+<li>数据库查询失败的兜底。</li>
+<li>后台刷新任务异常。</li>
+<li>热点 key 识别和监控。</li>
+</ul>
+<p>缓存保护失败后，大量请求可能击穿数据库。最后一题看如何快速止损。</p>
+<h2 id="10-热点缓存击穿导致数据库负载飙升如何应急处理">10. 热点缓存击穿导致数据库负载飙升，如何应急处理？</h2>
+<p><strong>答案：</strong></p>
+<p>首先要限流或降级，阻止新增请求继续压垮数据库。</p>
+<p>然后恢复热点缓存：</p>
+<ul>
+<li>人工预热热点 key。</li>
+<li>启动单线程或受控并发重建。</li>
+<li>临时返回旧数据或默认数据。</li>
+</ul>
+<p>同时要关闭不必要的重试，避免流量被进一步放大。</p>
+<p>接下来检查：</p>
+<ul>
+<li>数据库连接池是否耗尽。</li>
+<li>是否出现慢 SQL。</li>
+<li>是否存在锁等待。</li>
+<li>非核心定时任务是否占用数据库。</li>
+<li>下游请求是否持续重试。</li>
+</ul>
+<p>必要时暂停非核心任务，优先保护核心业务。</p>
+<p>故障恢复后，应补充：</p>
+<ul>
+<li>热点 key 识别。</li>
+<li>互斥重建。</li>
+<li>逻辑过期。</li>
+<li>缓存预热。</li>
+<li>过期时间随机抖动。</li>
+<li>数据库限流和熔断。</li>
+<li>故障压测与演练。</li>
+</ul>
+</div>
+        <nav class="adjacent-nav" aria-label="相邻文章">
+          <span class="adjacent-empty">上一篇</span>
+          <span class="adjacent-empty">下一篇</span>
+        </nav>
+      </article>
+      <a class="back-to-top" href="#top">返回顶部</a></main>
+    <aside>
+      <section class="aside-card">
+        <p class="eyebrow">ABOUT</p>
+        <h2>关于这里</h2>
+        <p>记录技术学习、人工智能、文学创作与生活随想。</p>
+      </section>
+      <section class="aside-card">
+        <p class="eyebrow">CATEGORIES</p>
+        <ul class="category-list">
+    <li>
+      <a href="../../categories/java.html">
+        <span>Java</span>
+        <span>2</span>
+      </a>
+    </li>
+    <li>
+      <a href="../../categories/interview.html">
+        <span>面试题</span>
+        <span>1</span>
+      </a>
+    </li>
+    <li>
+      <a href="../../categories/ai.html">
+        <span>人工智能</span>
+        <span>1</span>
+      </a>
+    </li>
+    <li>
+      <a href="../../categories/literature.html">
+        <span>文学创作</span>
+        <span>1</span>
+      </a>
+    </li>
+    <li>
+      <a href="../../categories/essays.html">
+        <span>个人随笔</span>
+        <span>1</span>
+      </a>
+    </li></ul>
+      </section>
+    </aside>
+  </div>
+  <footer class="site-footer">
+    <div class="shell">以 Markdown 写作，以网页阅读。</div>
+  </footer>
+  <script src="../../assets/blog.js"></script>
+</body>
+</html>

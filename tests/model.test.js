@@ -29,7 +29,8 @@ test("sorts newest first and creates navigation within each category", () => {
 
 test("retains empty configured categories", () => {
   const model = buildSiteModel([]);
-  assert.equal(model.categories.length, 4);
+  assert.equal(model.categories.length, 5);
+  assert.equal(model.categories[1].key, "interview");
   assert.equal(model.categories[0].articles.length, 0);
 });
 

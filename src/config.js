@@ -5,6 +5,11 @@ export const CATEGORIES = Object.freeze([
     description: "Java、Spring 与后端工程实践。"
   },
   {
+    key: "interview",
+    label: "面试题",
+    description: "面试准备、常见问题与知识点梳理。"
+  },
+  {
     key: "ai",
     label: "人工智能",
     description: "关于模型、工具与智能时代的学习记录。"
