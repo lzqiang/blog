@@ -124,6 +124,34 @@ server {
 }
 ```
 
+服务器上一键部署：
+
+```bash
+cd /opt/blog
+npm run deploy
+```
+
+这个脚本会依次执行：
+
+1. `git pull --ff-only`
+2. `npm ci`
+3. `npm run build`
+4. `rsync -av --delete dist/ /var/www/blog/dist/`
+5. `nginx -t`
+6. `systemctl reload nginx`
+
+如果你的 Nginx 目录不是 `/var/www/blog/dist`，执行时覆盖 `DEPLOY_DIR`：
+
+```bash
+DEPLOY_DIR=/usr/share/nginx/html npm run deploy
+```
+
+如果当天不想拉 Git，只想重新构建并部署当前代码：
+
+```bash
+SKIP_GIT_PULL=1 npm run deploy
+```
+
 手动部署示例：
 
 ```bash
