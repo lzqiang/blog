@@ -5,3 +5,4 @@ node_modules/
 /.idea/
 /.code-review-graph/
 /dist/
+/AGENTS.md
